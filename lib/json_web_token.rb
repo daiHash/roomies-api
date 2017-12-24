@@ -1,6 +1,8 @@
 module JsonWebToken
 # our secret key to encode our jwt
-  def selfencode(payload, exp = 2.hours.from_now)
+  def self.encode(payload, exp = 6.hours.from_now)
+    # set issuer
+    payload[:iss] = 'Roomies app'
     # set token expiration time
     payload[:exp] = exp.to_i
 
@@ -8,7 +10,7 @@ module JsonWebToken
     JWT.encode(payload, Rails.application.secrets.secret_key_base)
   end
 
-  def selfdecode(token)
+  def self.decode(token)
     #decodes the token to get user data (payload)
     body = JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
     HashWithIndifferentAccess.new body
