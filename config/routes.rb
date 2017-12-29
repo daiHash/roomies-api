@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     post '/login', to: 'users#login'
 
     post '/profiles', to: 'profiles#create'
-    # get '/profiles', to: 'profiles#index'
+    get '/profiles', to: 'profiles#index'
     get '/profiles/:id', to: 'profiles#show'
   end
 end

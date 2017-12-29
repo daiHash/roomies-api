@@ -1,16 +1,16 @@
 class V1::ProfilesController < ApplicationController
    before_action :check_profile_presence, only: [:new, :create]
 
-   # def index
-   #   @profiles = Profile.all
-   #   render json: {status: 'Success', message: 'Loaded profiles', data: @profiles}, status: :ok
-   # end
+   def index
+     @profiles = Profile.all
+     render json: {status: 'Success', message: 'Loaded profiles', data: @profiles}, status: :ok
+   end
 
   def show
     @user = User.find_by(id: params[:id])
-    @profile = Profile.joins(:user).where(:profiles => { :user_id => @user.id })
+    @profile = Profile.where(:profiles => { :user_id => @user.id })
 
-    render json: {status: 'Success', message: 'Loaded profile', data: @profile}, status: :ok
+    render json: @profile, status: :ok
   end
 
   def create
