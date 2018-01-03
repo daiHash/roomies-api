@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227081824) do
+ActiveRecord::Schema.define(version: 20180103085703) do
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
-    t.integer "age"
+    t.string "age"
     t.text "description"
     t.boolean "is_smoker", default: false, null: false
     t.string "nationality"
