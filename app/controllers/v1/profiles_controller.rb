@@ -22,6 +22,16 @@ class V1::ProfilesController < ApplicationController
     end
   end
 
+  def update
+    # @user = User.find_by(id: params[:id])
+    @profile = Profile.where(:profiles => { :user_id => current_user.id })
+    if @profile.update profile_params
+      render json: {status: 'Success', message: 'Updated profile', data: @profile}, status: :ok
+    else
+      render json: {status: 'Error', message: 'Profile update failed', data: @profile.errors}, status: 400
+    end
+  end
+
   private
 
   def profile_params
