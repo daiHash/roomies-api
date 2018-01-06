@@ -25,7 +25,14 @@ class V1::ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.permit(:age, :description, :occupation, :is_smoker, :nationality)
+    params.permit(
+      :age,
+      :description,
+      :occupation,
+      :is_smoker,
+      :nationality,
+      :first_name,
+      :last_name)
   end
 
   def check_profile_presence
