@@ -1,13 +1,18 @@
 class V1::UsersController < ApplicationController
   skip_before_action :authenticate_request, only: %i[login register]
 
+  def show
+    @user = User.find(params[:id])
+    render json: @user.profiles
+  end
+
   def login
     authenticate(login_params[:email], login_params[:password])
   end
 
   # Register a new User
   def register
-    @user = User.create(user_params)
+    @user = User.new(user_params)
    if @user.save
     response = { message: 'User created successfully' }
     render json: response, status: :created
